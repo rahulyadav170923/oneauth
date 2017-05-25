@@ -37,18 +37,17 @@ var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   Client.findById(req.query.client_id).then(data=>{
     var domain = data.dataValues.domain;
-    console.log(domain)
     var found = false;
     if(domain.map(function(url){return getHostName(url)}).indexOf(getHostName(req.header('Origin')))!==-1){
         found = true;
     }
     if(found){
-        corsOptions = { origin: true }
+        corsOptions = { origin: true };
     }
     else{
-        corsOptions = { origin: false }
+        corsOptions = { origin: false };
     }
-    callback(null, corsOptions)
+    callback(null, corsOptions);
 });
 };
 
